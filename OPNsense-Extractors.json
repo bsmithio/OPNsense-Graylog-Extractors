@@ -1,0 +1,134 @@
+{
+  "extractors": [
+    {
+      "title": "OPNsense: IPv4 UDP",
+      "extractor_type": "regex",
+      "converters": [
+        {
+          "type": "csv",
+          "config": {
+            "column_header": "rule_number,sub_rule_number,anchor,tracker,interface,reason,action,direction,ip_version,tos,ecn,ttl,id,offset,flags,protocol_id,protocol_name,length,src_ip,dst_ip,src_port,dst_port,datalen",
+            "trim_leading_whitespace": true
+          }
+        }
+      ],
+      "order": 2,
+      "cursor_strategy": "copy",
+      "source_field": "message",
+      "target_field": "filterlog_ipv4_udp",
+      "extractor_config": {
+        "regex_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*)$"
+      },
+      "condition_type": "regex",
+      "condition_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*,(in|out),4,.*,udp,.*)$"
+    },
+    {
+      "title": "OPNsense: IPv4 ICMP",
+      "extractor_type": "regex",
+      "converters": [
+        {
+          "type": "csv",
+          "config": {
+            "column_header": "rule_number,sub_rule_number,anchor,tracker,interface,reason,action,direction,ip_version,tos,ecn,ttl,id,offset,flags,protocol_id,protocol_name,length,src_ip,dst_ip,datalen"
+          }
+        }
+      ],
+      "order": 4,
+      "cursor_strategy": "copy",
+      "source_field": "message",
+      "target_field": "filterlog_ipv4_icmp",
+      "extractor_config": {
+        "regex_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*)$"
+      },
+      "condition_type": "regex",
+      "condition_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*,(in|out),4,.*,icmp,.*)$"
+    },
+    {
+      "title": "OPNsense: IPv6 ICMP",
+      "extractor_type": "regex",
+      "converters": [
+        {
+          "type": "csv",
+          "config": {
+            "column_header": "rule_number,sub_rule_number,anchor,tracker,interface,reason,action,direction,ip_version,class,flow,hoplimit,protocol_name,protocol_id,length,src_ip,dst_ip,datalen"
+          }
+        }
+      ],
+      "order": 5,
+      "cursor_strategy": "copy",
+      "source_field": "message",
+      "target_field": "filterlog_ipv6_icmp",
+      "extractor_config": {
+        "regex_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*)$"
+      },
+      "condition_type": "regex",
+      "condition_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*,(in|out),6,.*,ipv6-icmp,.*)$"
+    },
+    {
+      "title": "OPNsense: IPv6 UDP",
+      "extractor_type": "regex",
+      "converters": [
+        {
+          "type": "csv",
+          "config": {
+            "column_header": "rule_number,sub_rule_number,anchor,tracker,interface,reason,action,direction,ip_version,class,flowlabel,hoplimit,protocol_name,protocol_id,length,src_ip,dst_ip,src_port,dst_port,datalength"
+          }
+        }
+      ],
+      "order": 3,
+      "cursor_strategy": "copy",
+      "source_field": "message",
+      "target_field": "filterlog_ipv6_udp",
+      "extractor_config": {
+        "regex_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*)$"
+      },
+      "condition_type": "regex",
+      "condition_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*,(in|out),6,.*,udp,.*)$"
+    },
+    {
+      "title": "OPNsense: IPv6 TCP",
+      "extractor_type": "regex",
+      "converters": [
+        {
+          "type": "csv",
+          "config": {
+            "column_header": "rule_number,sub_rule_number,anchor,tracker,interface,reason,action,direction,ipversion,class,flowlabel,hoplimit,protocol_name,protocol_id,length,src_ip,dst_ip,src_port,dst_port,datalength,flags,sequence,ack,window,urg,options",
+            "trim_leading_whitespace": true
+          }
+        }
+      ],
+      "order": 1,
+      "cursor_strategy": "copy",
+      "source_field": "message",
+      "target_field": "filterlog_ipv6_tcp",
+      "extractor_config": {
+        "regex_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*)$"
+      },
+      "condition_type": "regex",
+      "condition_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*,(in|out),6,.*,tcp,.*)$"
+    },
+    {
+      "title": "OPNsense: IPv4 TCP",
+      "extractor_type": "regex",
+      "converters": [
+        {
+          "type": "csv",
+          "config": {
+            "column_header": "rule_number,sub_rule_number,anchor,tracker,interface,reason,action,direction,ip_version,tos,ecn,ttl,id,offset,ip_flags,protocol_id,protocol_name,length,src_ip,dst_ip,src_port,dst_port,datalen,flags,sequence,ack,window,urg,options",
+            "trim_leading_whitespace": true
+          }
+        }
+      ],
+      "order": 0,
+      "cursor_strategy": "copy",
+      "source_field": "message",
+      "target_field": "filterlog_ipv4_tcp",
+      "extractor_config": {
+        "regex_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*)$"
+      },
+      "condition_type": "regex",
+      "condition_value": "^(?i).*\\sfilterlog\\[[0-9]+\\]:\\s(.*,(in|out),4,.*,tcp,.*)$"
+    }
+  ],
+  "version": "4.2.1"
+}
